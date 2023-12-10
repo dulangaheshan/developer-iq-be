@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: developer-iq-app
-        image: 414238480542.dkr.ecr.ap-south-1.amazonaws.com/k8s-cicd-node-js:latest
+        image: 414238480542.dkr.ecr.ap-south-1.amazonaws.com/k8s-cicd-node-js:TAG_PLACEHOLDER
         ports:
         - containerPort: 5000

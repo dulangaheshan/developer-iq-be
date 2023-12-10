@@ -6,7 +6,6 @@ phases:
 
   build:
     commands:
-      - eksctl create cluster --name developer-iq --region ap-south-1 --node-type t2.micro
       # Build the Docker image
       - docker build -t $ECR_URI:$CODEBUILD_RESOLVED_SOURCE_VERSION .
       # Login to ECR
@@ -16,10 +15,11 @@ phases:
 
   post_build:
     commands:
+      # - eksctl create cluster --name developer-iq --region ap-south-1 --node-type t2.micro
       # Update the kubeconfig file
       - aws eks update-kubeconfig --name developer-iq --region ap-south-1
       # Generate Kubernetes manifests
-      - kubectl apply -f k8configs/deployments.yml
+      - sed "s/TAG_PLACEHOLDER/$CODEBUILD_RESOLVED_SOURCE_VERSION/" k8configs/deployments.yml | kubectl apply -f -
       - kubectl apply -f k8configs/services.yml
 
 # Define environment variables
