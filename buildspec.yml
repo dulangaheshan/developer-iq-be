@@ -21,7 +21,7 @@ phases:
       # Generate Kubernetes manifests
       - sed "s/TAG_PLACEHOLDER/$CODEBUILD_RESOLVED_SOURCE_VERSION/" k8configs/deployments.yml | kubectl apply -f -
       - kubectl apply -f k8configs/services.yml
-      # - kubectl apply -f k8configs/networking.yml
+      - kubectl apply -f k8configs/networking.yml
 
 # Define environment variables
 env:

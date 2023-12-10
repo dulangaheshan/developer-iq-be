@@ -2,15 +2,18 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: developer-iq-app-ingress
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
+  ingressClassName: alb  # Use the new field for specifying Ingress class
   rules:
-  - host: ae9358b057de3405cbc075bf375fd05a-438702828.ap-south-1.elb.amazonaws.com
-    http:
-      paths:
-      - path: /api
-        pathType: Prefix
-        backend:
-          service:
-            name: developer-iq-app-service
-            port:
-              number: 80
+    - http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: developer-iq-app-service-be
+                port:
+                  number: 5000
