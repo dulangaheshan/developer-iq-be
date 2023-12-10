@@ -18,6 +18,7 @@ phases:
       # - eksctl create cluster --name developer-iq --region ap-south-1 --node-type t2.micro
       # Update the kubeconfig file
       - aws eks update-kubeconfig --name developer-iq --region ap-south-1
+      - eksctl create iamserviceaccount --region ap-south-1 --name iq-be-service-account --namespace default --cluster developer-iq --approve --attach-policy-arn arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
       # Generate Kubernetes manifests
       - sed "s/TAG_PLACEHOLDER/$CODEBUILD_RESOLVED_SOURCE_VERSION/" k8configs/deployments.yml | kubectl apply -f -
       - kubectl apply -f k8configs/services.yml

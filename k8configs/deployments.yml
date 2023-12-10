@@ -12,6 +12,7 @@ spec:
       labels:
         app: developer-iq-app
     spec:
+      serviceAccountName: iq-be-service-account
       containers:
       - name: developer-iq-app
         image: 414238480542.dkr.ecr.ap-south-1.amazonaws.com/k8s-cicd-node-js:TAG_PLACEHOLDER
