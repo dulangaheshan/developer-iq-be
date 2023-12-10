@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: developer-iq-app
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: developer-iq-app
