@@ -11,24 +11,24 @@ def hello_world():  # put application's code here
     return 'Hello World!'
 
 
-@app.route('/all_repositories')
+@app.route('/api/all_repositories')
 def all_repositories():
     return get_all_repositories()
 
 
-@app.route('/repositories', methods=['GET'])
+@app.route('/api/repositories', methods=['GET'])
 def all_repositories_for_day_id():
     day_id = request.args.get('day_id')
     return get_repositories(day_id)
 
 
-@app.route('/contributors', methods=['GET'])
+@app.route('/api/contributors', methods=['GET'])
 def get_contributors_in_repo():
     repo = request.args.get('repo')
     return get_contributors_in_repository(repo)
 
 
-@app.route('/events')
+@app.route('/api/events')
 def get_events():  # put application's code here
     return 'Hello World!'
 

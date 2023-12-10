@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: developer-iq-app-ingress
+spec:
+  rules:
+  - host: ae9358b057de3405cbc075bf375fd05a-438702828.ap-south-1.elb.amazonaws.com
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: developer-iq-app-service
+            port:
+              number: 80
