@@ -53,7 +53,7 @@ def get_contributors_in_repository(repository):
     return UsersTable.query(KeyConditionExpression=filtering_exp)
 
 
-def get_events(partition_key, sort_key):
+def get_events_by_key(partition_key, sort_key):
     try:
         response = EventsTable.get_item(
             Key={
@@ -64,9 +64,9 @@ def get_events(partition_key, sort_key):
 
         item = response.get('Item')
         if item:
-            print('Item found:', item)
+            return item
         else:
-            print('Item not found.')
+            return None
 
     except NoCredentialsError:
-        print('Credentials not available.')
+        return None

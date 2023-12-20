@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import request
 
-from utils.dynamodb_handler import get_repositories, get_all_repositories, get_contributors_in_repository
+from utils.dynamodb_handler import get_repositories, get_all_repositories, get_contributors_in_repository, \
+    get_events_by_key
 
 app = Flask(__name__)
 
@@ -28,9 +29,11 @@ def get_contributors_in_repo():
     return get_contributors_in_repository(repo)
 
 
-@app.route('/api/events')
-def get_events():  # put application's code here
-    return 'Hello World!'
+@app.route('/api/events',  methods=['GET'])
+def get_events():
+    repo = request.args.get('repo')
+    day_id = request.args.get('day_id')
+    return get_events_by_key(repo, day_id)
 
 
 if __name__ == '__main__':
